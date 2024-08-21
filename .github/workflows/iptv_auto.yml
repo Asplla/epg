@@ -1,4 +1,4 @@
-name: M3U && EPG Update
+name: EPG Update
 on:
   push:
   schedule:
@@ -15,12 +15,10 @@ jobs:
     - name: Update M3U && EPG Files
       run: |
         rm -f e.xml && wget https://epg.112114.xyz/pp.xml -O e.xml
-        rm -f ipv4.m3u && wget https://live.fanmingming.com/tv/m3u/index.m3u -O ipv4.m3u
-        rm -f ipv6.m3u && wget https://live.fanmingming.com/tv/m3u/ipv6.m3u -O ipv6.m3u
         git config --local user.name "github-actions[bot]"
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git add e.xml ipv4.m3u ipv6.m3u
-        git commit -m "m3u and epg Automatic Update."
+        git add e.xml
+        git commit -m "epg Automatic Update."
     - name: Push changes
       run: git push -f origin main
       env:
